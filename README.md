@@ -80,76 +80,99 @@ Only perform this if this is the first time you will setup your Git Environment
 **Laboratory # 11 - Guided Coding Exercise: Nested if...else Statements in Python**
 
    **Objective:**
-   - Understand the syntax and structure of a basic if statement.
-   - Learn how a condition controls the execution of a code block.
-   - Practice using comparison operators in conditional statements.
-   - Understand the importance of indentation in Python.
+   - Learn how to nest if...else statements to create more complex decision-making structures.
+   - Understand how inner if statements depend on outer conditions.
+   - Practice handling string input and performing case-insensitive comparisons.
 
    **Desired Output (Example 1):**
    ```bash
-   It's a hot day!
-   
+   Enter your age: 25
+   Are you a member? (Yes/No): yes
+   Access granted.
    ```
-
-   **Desired Output (Example 2):***(No output)*
+   **Desired Output (Example 2):**
+   ```bash
+   Enter your age: 16
+   Are you a member? (Yes/No): no
+   Access denied. Must be at least 18 years old.
+   ```
+   **Desired Output (Example 3):**
+   ```bash
+   Enter your age: 20
+   Are you a member? (Yes/No): No
+   Membership required for access.
+   ```
    
-   - (Example 1) - If temperature is greater than 30.
-   - (Example 2) - If temperature is 30 or less.
-      
    **Notable Observations (to be discussed after completing the exercise):**
-   - The code inside the if statement block only executes if the condition is True.
-   - Indentation is crucial in Python. It defines the code block associated with the if statement. Incorrect indentation will lead to errors.
-   - The > operator is used for "greater than" comparison. Other comparison operators include: 
-      - < (less than)
-      - >= (greater than or equal to)
-      - <= (less than or equal to)
-      - == (equal to)
-      - != (not equal to)
-   - Variables can be used in the condition. This makes the if statement dynamic.
+   - Nested if statements allow you to check conditions within other conditions. The inner if statement's execution depends on the outer if statement's result.
+   - Indentation is extremely important for nested if statements. It determines which code block belongs to which condition.
+   - String comparisons in Python are case-sensitive by default. It's often good practice to convert strings to lowercase (or uppercase) before comparing them to avoid issues with different capitalization.
+   - The .strip() method is useful for removing leading/trailing whitespace from user input, which can prevent unexpected behavior.
 
    **Python Best Practices**
-   - Descriptive Variable Names: Use clear and descriptive variable names (e.g., temperature instead of t). This improves code readability.
-   - Comments: Add comments to explain your code's logic, especially for more complex conditions.
-   - Consistent Indentation: Maintain consistent indentation (4 spaces per level is the recommended standard in Python). This is essential for Python's syntax.
-   - Meaningful Conditions: Write conditions that are clear and easy to understand.
-   - Test Thoroughly: Test your code with different inputs to ensure it behaves as expected in various scenarios (e.g., when the condition is true and when it's false).
+   - Clear and Consistent Indentation: Correct indentation is essential for nested if statements to work correctly. Use 4 spaces for each level of indentation.
+   - Input Validation and Normalization:
+      - Validate numerical input (e.g., using try-except to ensure the age is a valid integer).
+      - Normalize string input (e.g., convert to lowercase using .lower() and remove leading/trailing whitespace using .strip()) to handle variations in user input (e.g., "yes", "Yes", " YES ", "no", "No").
+   - Descriptive Variable Names: Use clear variable names (e.g., age, is_member).
+   - Comments: Add comments to explain complex logic, especially when nesting multiple levels of if statements.
+   - Test Thoroughly: Test your code with various inputs to ensure it handles all possible scenarios correctly (different ages, membership status - yes/no variations).
 
    **Step-by-Step Instructions:**
 
    1. Setting up: Open your preferred Python environment or Text Editor, and create a Python Script.
       - Required Filename: `nested_if_else_statement.py`
       
-   2.  Define a variable:
-      - Create a variable named temperature. Assign it a numeric value (e.g., 35). You can change this value later to test different scenarios.
+   2.  Get user input:
+      - Use the input() function to prompt the user for their age. Store the returned string.
+      - Use the input() function to prompt the user for their membership status (Yes/No). Store the returned string.      
 ```python
-temperature = 35  # Or any other number
+age_str = input("Enter your age: ")
+membership_str = input("Are you a member? (Yes/No): ")
 ```
       
-   3.  Write an if statement:
-      - Use the if keyword followed by a condition. The condition should check if temperature is greater than 30. End the line with a colon (:).
+   3.  Convert input:
+      - Convert the age input string to an integer using int(). Store the result in the age variable.
+      - Convert the membership input to lowercase and remove leading/trailing spaces using .strip().lower(). Store the result in the membership variable.
 ```python
-if temperature > 30:
+age = int(age_str)
+membership = membership_str.strip().lower()
 ```
 
-   4. Print a message (indented)
-      - On the next line, indented, write the code that you want to execute if the condition is true. In this case, print the message "It's a hot day!". Make sure the indentation is consistent (4 spaces).
+   4. Use nested if statements:
+      - Write an outer if statement to check if the age is greater than or equal to 18.
+      - Inside the outer if block, write another if statement to check if the membership status is "yes".
+      - Inside the inner if block, print "Access granted.".
+      - Inside the outer if block, but after the inner if statement, add an else block (this else is associated with the inner if). Inside this else block, print "Membership required for access.".
+      - After the outer if block, add an else block (this else is associated with the outer if). Inside this else block, print "Access denied. Must be at least 18 years old.".
 ```python
-    print("It's a hot day!")  # Indented 4 spaces
+if age >= 18:
+    if membership == "yes":
+        print("Access granted.")
+    else:
+        print("Membership required for access.")
+else:
+    print("Access denied. Must be at least 18 years old.")
 ```
 
    5. Complete Code: Combine the steps above to form the complete program.
-
    6. Run the code: Execute your Python code.
    7. Observe the output: 
       - If temperature is greater than 30, you should see the message printed.
       - If temperature is 30 or less, nothing will be printed.
      
-   8. Experiment: Change the value of temperature and run the code again. Try values greater than 30 and values less than or equal to 30. Observe the different outputs.
+   8. (Optional) Input Validation: Add a try-except block to handle potential ValueError if the user enters non-integer input for age.
+```python
+try:
+    #your code here
 
-   9. Try other comparison operators: Change the > operator to other comparison operators (e.g., <, >=, <=, ==, !=) and see how the program's behavior changes. For example, try: if temperature <= 30:
+except ValueError:
+    print("Invalid age input. Please enter an integer.")
+```
+
 
    **Conclusion**
-   This exercise introduced the fundamental concept of the if statement in Python. You learned how to write a simple if statement, how a condition controls the execution of code, and the importance of indentation. You also practiced using comparison operators and following Python best practices. The if statement is a powerful tool for creating programs that can make decisions based on different conditions. This is a building block for more complex control flow structures you'll learn later.
+   This exercise demonstrated how to use nested if...else statements to create more complex decision-making structures. You learned how inner if statements depend on the conditions of outer if statements and the importance of correct indentation.  You also practiced handling string input, performing case-insensitive comparisons, and (optionally) adding input validation. Nested if...else statements are essential for building programs that can handle multiple levels of conditions and make more nuanced decisions.
 
 ### **Step 4: Push Changes to GitHub**
 Once you've completed your changes, follow these steps to upload your work to your GitHub repository.
