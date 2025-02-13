@@ -1,1 +1,1 @@
-Enter your numeric grade: Your grade is: A
+Enter your age: Are you a member? (Yes/No): Access granted.
