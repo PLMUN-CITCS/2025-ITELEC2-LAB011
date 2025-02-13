@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run the Python program and test all input/output pairs in the tests folder
-python_script="if_elif_else_statement.py"
+python_script="nested_if_else_statement.py"
 
 declare -A results
 
